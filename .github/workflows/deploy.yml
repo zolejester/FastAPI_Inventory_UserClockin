@@ -1,0 +1,23 @@
+name: Deploy
+
+on:
+    push:
+        branches: [master, main]
+
+jobs:
+    deploy:
+        runs-on: ubuntu-lastest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Set up Python
+              uses: actions/setup-python@v2
+              with:
+                python-version: '3.12'
+              env:
+                MONGODB_USER: ${{secrets.MONGODB_USER}}
+                MONGODB_PASSWORD: ${{secrets.MONGODB_PASSWORD}}
+
+
